@@ -10,22 +10,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera playerCamera;
     
-    
-    
     [Header("Movement Settings")]
     public float runAcceleration = 0.25f;
     public float runSpeed = 4f;
     public float drag = 0.1f;
+    public float gravity = -9.81f;
+    public float jumpSpeed = 8.0f;
 
-    [Header("Camera Setings")] 
+    [Header("Camera Settings")] 
     public float lookSenseH = 0.1f;
     public float lookSenseV = 0.1f;
     public float lookLimitV = 89f;
     
+    public enum PlayerState
+    {
+        IDLE, 
+        RUNNING, 
+        AIRBORNE
+    }
     private PlayerLocomotionInput _playerLocomotionInput;
     private Vector2 _cameraRotation = Vector2.zero;
     private Vector2 _playerTargetRotation = Vector2.zero;
-
+    private float _verticalVelocity = 0f;
+    private PlayerState _currentState;
+    
     private void Awake()
     {
         _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
@@ -40,6 +48,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleMovement();
+         
+    }
+
+
+    private void LateUpdate()
+    {
+        RotateCamera();
+    }
+
+
+    private void RotateCamera()
+    {
+        _cameraRotation.x += lookSenseH * _playerLocomotionInput.LookInput.x;
+        _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV *  _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
+        
+        _playerTargetRotation.x = transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;  
+        transform.rotation = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
+        
+        playerCamera.transform.rotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0f);
+    }
+
+    private void HandleMovement()
+    {
+        HandleJump();
+        HandleGroundedMovement();
+    }
+
+
+    private void HandleGroundedMovement()
+    {
         Vector3 cameraForwardXZ = new Vector3(playerCamera.transform.forward.x, 0f, playerCamera.transform.forward.z).normalized;
         Vector3 cameraRightXZ = new Vector3(playerCamera.transform.right.x, 0f, playerCamera.transform.right.z).normalized;
         Vector3 movementDirection = cameraRightXZ * _playerLocomotionInput.MovementInput.x + cameraForwardXZ * _playerLocomotionInput.MovementInput.y; 
@@ -50,19 +89,57 @@ public class PlayerController : MonoBehaviour
         Vector3 currentDrag = newVelocity.normalized * drag * Time.deltaTime;
         newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
         newVelocity = Vector3.ClampMagnitude(newVelocity, runSpeed);
+        newVelocity.y += _verticalVelocity;
         characterController.Move(newVelocity * Time.deltaTime);
-         
     }
 
 
-    private void LateUpdate()
+    private void HandleJump()
     {
-        _cameraRotation.x += lookSenseH * _playerLocomotionInput.LookInput.x;
-        _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV *  _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
-        
-        _playerTargetRotation.x = transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;  
-        transform.rotation = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
-        
-        playerCamera.transform.rotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0f);
+        if (_verticalVelocity < 0 && characterController.isGrounded)
+        {
+            _verticalVelocity = 0f;
+
+            if (_playerLocomotionInput.JumpPressed && characterController.isGrounded)
+            {
+                _verticalVelocity += Mathf.Sqrt(jumpSpeed * -3f * gravity);
+            }        
+        }
     }
+
+    #region StateMachine
+
+    private void UpdateState()
+    {
+        switch (_currentState)
+        {
+            case PlayerState.IDLE:
+                UpdateIdle();
+                break;
+            case PlayerState.RUNNING:
+                UpdateRun();
+                break;
+            case PlayerState.AIRBORNE:
+                UpdateAirborne();
+                break;
+        }
+    }
+
+
+    private void UpdateIdle()
+    {
+        ;
+    }
+
+    private void UpdateRun()
+    {
+        ;
+    }
+
+    private void UpdateAirborne()
+    {
+        ;
+    }
+
+    #endregion
 }
