@@ -2844,11 +2844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493985264694879976, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
       propertyPath: drag
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3493985264694879976, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
       propertyPath: runSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493985264694879976, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
+      propertyPath: jumpSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3493985264694879976, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
       propertyPath: lookSenseH
@@ -2923,8 +2927,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8173271255024461907, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 775397892}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2436360770732005472, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 5636549766960009844}
   m_SourcePrefab: {fileID: 100100000, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
+--- !u!1 &5636549766960009843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2436360770732005472, guid: 2f829005d9d92c942a4ca446522bb79e, type: 3}
+  m_PrefabInstance: {fileID: 5636549766960009842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5636549766960009844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636549766960009843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc1eb7d1d7ace54bac6397904b81063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerState
+  <CurrentPlayerMovementState>k__BackingField: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
