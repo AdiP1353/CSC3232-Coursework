@@ -16,11 +16,11 @@
 
 ### 1.2 Advanced Physics (+8%)
 
-- [ ] 2a) 2% — Physics properties changed via scripts  
+- [x] 2a) 2% — Physics properties changed via scripts  
 - [ ] 2b) 2% — Mass/physics as a gameplay mechanic  
-- [ ] 2c) Additional forces (projectiles, gravity, etc.):  
+- [x] 2c) Additional forces (projectiles, gravity, etc.):  
 - - [ ] 1% — SUVAT used incorrectly
-- - [ ] 2% — Physically correct calculations
+- - [x] 2% — Physically correct calculations
 
 
 - [ ] 2d) 2% — AI calculates projectile forces  
@@ -28,10 +28,10 @@
 ---
 ### 1.3 Basic Collision Volumes (+5%)
 
-- [ ] 3a) 1% — At least one collision volume  
+- [x] 3a) 1% — At least one collision volume  
 - [ ] 3b) 1% — More than one collision volume  
-- [ ] 3c) Collision volume matches mesh:  
-- - [ ]  1% — Sphere / Capsule / Box 
+- [x] 3c) Collision volume matches mesh:  
+- - [x]  1% — Sphere / Capsule / Box 
 - - [ ] 2% — Mesh or Convex
 - - [ ] 3% — Advanced (Terrain, Wheel)
 
@@ -73,10 +73,10 @@
 ## 2. Graphics (+10%)
   ### 2.1 Graphical Elements (capped at +5%)
 
-- [ ] 7a) 2% — Multiple textures  
+- [x] 7a) 2% — Multiple textures  
 - [ ] 7b) 2% — Appropriate lighting  
-- [ ] 7c) 1% — Objects move/rotate via script  
-- [ ] 7d) 3% — Navigable 3D camera  
+- [x] 7c) 1% — Objects move/rotate via script  
+- [x] 7d) 3% — Navigable 3D camera  
 ---
 ### 2.2 Advanced Graphics (+5%)
 
@@ -111,7 +111,7 @@
 - [ ] 10a) 4% — Simple state machines (booleans/enums)  
 - [ ] 10b) 6% — States encapsulated in classes  
 - [ ] 10c) 7% — Hierarchical state machines or external tools  
-- [ ] 10d) 8% — Triggered by external events/timeouts  
+- [x] 10d) 8% — Triggered by external events/timeouts  
 - [ ] 10e) 10% — Probabilistic/stochastic state transitions  
 ---
 ### 4.2 Advanced AI (≤12%)
@@ -131,8 +131,8 @@
 
 ### A1) Prefabs (+2%)  
 
-- - [ ]  +0.75% — PrefabInstance in scene
-- - [ ] +0.25% — Prefabs in project
+- - [x]  +0.75% — PrefabInstance in scene
+- - [x] +0.25% — Prefabs in project
 - - [ ] +1% — Instantiate used in C#
 
 ### A2) Levels & Menus (+2%)
