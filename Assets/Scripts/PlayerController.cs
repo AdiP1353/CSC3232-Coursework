@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     public float movingThreshold = 0.01f;
 
     [Header("Camera Settings")] 
-    public float lookSenseH = 0.1f;
-    public float lookSenseV = 0.1f;
+    public float lookSenseH = 1f;
+    public float lookSenseV = 1f;
     public float lookLimitV = 89f;
     
     
@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
-         
     }  
 
     private void HandleMovement()
@@ -100,8 +99,7 @@ public class PlayerController : MonoBehaviour
             _verticalVelocity += Mathf.Sqrt(jumpSpeed * -3f * gravity);
         }
     }
-
-
+    
     private void UpdateMovementState()
     {
         bool isMovementInput = _playerLocomotionInput.MovementInput != Vector2.zero;
@@ -120,6 +118,7 @@ public class PlayerController : MonoBehaviour
             _playerState.SetPlayerMovementState(PlayerMovementState.Falling);
         }
     }
+    
     #endregion
 
     #region Late Update Logic
@@ -135,7 +134,7 @@ public class PlayerController : MonoBehaviour
         _cameraRotation.x += lookSenseH * _playerLocomotionInput.LookInput.x;
         _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV *  _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
         
-        _playerTargetRotation.x = transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;  
+        _playerTargetRotation.x += transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;  
         transform.rotation = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
         
         playerCamera.transform.rotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0f);
@@ -156,6 +155,11 @@ public class PlayerController : MonoBehaviour
         return characterController.isGrounded;
     }
 
+    private bool AttackCheck()
+    {
+        return _playerLocomotionInput.AttackPressed;
+    }
+    
     #endregion
 
 }
