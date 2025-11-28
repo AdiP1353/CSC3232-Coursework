@@ -155,6 +155,19 @@ public class PlayerController : MonoBehaviour
         return characterController.isGrounded;
     }
 
+
+    private bool GroundedGroundCheck()
+    {
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - characterController.radius, transform.position.z);
+        return true;
+    }
+
+
+    private bool AirborneGroundCheck()
+    {
+        return true;
+    }
+
     private bool AttackCheck()
     {
         return _playerLocomotionInput.AttackPressed;
